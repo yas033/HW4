@@ -1,0 +1,402 @@
+<!Doctype html>
+<html lang="en">
+    <head>
+        <!--page title-->
+        <meta charset="UTF-8">
+        <!--tell browser that this site will auto fit ths screen size -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>
+            Yanhua's contact-site
+        </title>
+
+        <link rel="icon" href="head_icon.png" type="image/png">
+        <style>
+            table {
+                border: 3px solid black;
+                border-collapse: collapse;
+            }
+            th, td {
+                border: 1px solid black;
+                padding: 5px;
+            }
+
+            :root{
+                /* CSS Variables (make sure to use fallbacks while using variables) (2 pts) */
+                --background-color: #c4dfe7;
+                /*Custom Fonts (also with fallback for slow load or failure) (2 pts)*/
+                --main-font:Arial, Helvetica, sans-serif;
+                color:#749ba3;
+                background-color: #c4dfe7;
+                transition: background-color 0.3s, color 0.3s;
+                
+            }
+
+            nav {
+                /*Relative units like em, rem, %, etc. (1 pt)*/
+                font-size:1rem;
+                background-color: #bbe3f5;
+                display: block;
+                color:#2c4f4f;
+
+                border: 5px solid #61C0BF;
+                padding: 5px;
+                margin: 5px 0;
+
+                max-width: 90vw;
+                box-sizing: border-box;
+                border-radius: 16px;
+            }
+            
+            a {
+                color: #2c4f4f;
+            }
+
+            a:hover {
+                text-decoration: underline;
+            }
+
+            /*interact on the button*/
+            /*and color-mix()*/
+            .active-button:hover{
+                background-color: color-mix(in srgb, rgb(180, 239, 151) 70%, rgb(238, 192, 40));
+            }
+            .active-button:active{
+                background-color: rgb(255, 194, 12) !important;
+            }
+            
+            /*Scoped CSS*/
+            .p{
+                /*Use wider gamut color with color() */
+                background-color:black;
+                font-family:var(--main-font,serif);
+                color: color(display-p3 1 0.5 0);
+            }
+
+            /*Scoped CSS*/
+            .quick-access{
+                /*Dynamic viewport units dvw, dvh, etc. (1 pt)*/
+                height:3dvh;
+                background-color: rgb(231, 252, 252);
+            }
+
+            /*dark-mode quick-access*/
+            body.Dark-Mode .quick-access {
+                background-color: #797979;
+                }
+
+            /*CSS Animations*/
+            .logo img{
+                opacity:0;
+                animation:fade-In 3.5s ease-in-out forwards;
+                max-width:10%;
+                height: auto;
+            }
+
+            @keyframes fade-In{
+                from{opacity:0} to{opacity:1}
+            }
+
+            /*Media Queries (See Part 3 - Responsive Web Design) (1 pt)*/
+            /*@media media-type and (condition) {/* CSS rules here }*/
+            /*Very small screen (phone)*/
+            @media screen and (max-width: 600px) {
+                nav{
+                    display: flex;
+                    flex-direction: column;
+                    gap: 0.5rem;
+                    font-size: 1rem;
+                    align-items: flex-start;
+                    margin:10px;
+                }
+                
+                img{
+                    width: 100%;
+                    height: auto;
+                    max-width: 100%;
+                }
+
+                .photo_package{
+                    max-width: 100%
+                }
+
+                body{
+                    padding: 10px;
+                }
+
+                main, article, nav {
+                    width: 100%;
+                    box-sizing: border-box;
+                }
+
+                .menu-icon{
+                    display: block;
+                    margin: 10px;
+                }
+
+                .main-nav{
+                    display: none;
+                    flex-direction: column;
+                    gap: 1.5rem;
+                }
+
+                #menu-toggle:checked + .menu-icon + .main-nav {
+                    display: flex;
+                }
+
+                .main-nav.show{
+                    display: flex;
+                }
+            }
+
+            /*tablet or restrictive laptop*/
+            @media screen and (min-width:601px) and (max-width:1024px){
+                nav{
+                    font-size:1.2rem;
+                    gap:1rem;
+                }
+
+                img{
+                    width:80%;
+                    max-width:100%;
+                }
+
+                .photo_package{
+                    max-width:80%;
+                }
+
+                .menu-icon{
+                    display: block;
+                    margin: 10px;
+                }
+
+                .main-nav{
+                    display: none;
+                    flex-direction: column;
+                    gap: 1.5rem;
+                }
+
+                .main-nav.show{
+                    display: flex;
+                }
+            }
+
+            /*desktop*/
+            @media screen and (min-width:1025px){
+                nav{
+                    font: size 1.4rem;
+                    gap:1.5rem;
+                }
+
+                img{
+                    width:70%
+                }
+
+                .photo_package{
+                    max-width:60%;
+                }
+
+                .menu-icon{
+                    display: block;
+                    margin: 10px;
+                }
+
+                .main-nav{
+                    display: none;
+                    flex-direction: column;
+                    gap: 1.5rem;
+                }
+                
+                .main-nav.show{
+                    display: flex;
+                }
+            }
+        
+            /*-----------------------------DARK MODE-----------------------------*/    
+            body.Dark-Mode {
+                background-color: #2C2C2C;
+                color: #CCCCCC;
+            }   
+
+            body.Dark-Mode nav {
+                background-color: #000000;
+                color: #CCCCCC;
+            }
+
+            body.Dark-Mode nav a {
+                color: #c6dbf2;
+            }
+
+            .main-nav {
+                display: none;
+                flex-direction: column; /* stack items */
+                gap: 1rem;
+            }
+
+            /*New selectors like has() (2 pts)*/
+            /*Nested*/
+            /*if there has a .active-button*/
+            nav:has(.active-button) {
+                /*then add a 10 px solid rgb line*/
+                border-bottom: 10px solid rgb(238, 255, 0);
+            }    
+        </style>
+    </head>
+
+    <body>
+        <!--heading content-->
+        <!--header: ReadingMode + LOGO + Nav(quick☰ nav Menu/Search） ------------------------------>
+        <header>
+            <!--reading Mode------------------------------------------------------------------------>
+            <input type="checkbox" id="reading-toggle" hidden>
+            <button class="dark-mode-button" onclick="toggleDarkMode()">Reading Mode</button>
+            
+            <!--LOGO-------------------------------------------------------------------------------->
+            <a href="/" class="logo">
+                <img src="Yas033.png" alt="Yanhua's logo">
+            </a>
+
+            <!--☰ for quick nav-------------------------------------------------------------------->
+            <button class="menu-icon" onclick="toggleMenu()">☰</button>
+            <nav class="main-nav">
+                <!--nav links-->
+                <a href="index.html">Home</a>
+                <a href="about.html">About me</a>
+                <a href="project.html">Projects</a>
+                <a href="resume.html">Resume</a>
+                <a href="contact.html">Contact</a>
+                <form action="designed404page.html" method="get">
+                    <label for="site-search">Search:</label>
+                    <input type="search" id="site-search" name="q" placeholder="..." >
+                    <button type="submit" class="active-button">Go</button>
+                </form>
+                <select>
+                    <option value="/en">English</option>
+                    <option value="/zh">中文</option>
+                </select>
+            </nav>
+        </header>
+
+        <main>
+
+            <section>
+                <h2>Most Recent Works</h2>
+                <table>
+                    <caption>
+                        Project Overview
+                    </caption>
+                    <colgroup>
+                        <col span="1" style="background-color: #a0bbccee;">
+                        <col span="1" style="background-color: #bcfff9ee;">
+                    </colgroup>
+                    <tr>
+                        <th>Project</th>
+                        <th>Summary</th>
+                    </tr>
+                    <tr>
+                        <td>#1 coding</td>
+                        <td><code>print("Hello World")</code></td>
+                    </tr>
+                    <tr>
+                        <td>#2 keyboard</td>
+                        <td><kbd>Ctrl</kbd>+<kbd>C</kbd></td>
+                    </tr>   
+                    <tr>
+                        <td>#3 example</td>
+                        <td>not ready yet</td>
+                    </tr>   
+                </table>
+            </section>
+
+            <section>
+                <h4>Project Details</h4>
+                <dl>
+                    <dt>Project #1</dt>
+                    <dd>
+                        <ins>
+                            Updated in <time datetime="2025-07-13">July 13th,2025</time>
+                        </ins>
+                            , 
+                        <del>old version removed</del>
+                    </dd>
+                </dl>
+            
+                <details>
+                    <Summary>More Details About Project #1</Summary>
+                    <p>This project uses<dfn> SOME SPECIAL </dfn>technology</p>
+                </details>
+                <pre>
+                    <br />   
+                </pre>
+                <p>*************************************************************************</p>
+
+
+                <form action="designed404page.html" method="get">
+                    <label for="feedback">Feedback for:</label>
+                    <input id="feedback" list="feedback-list" placeholder="select or type your idea">
+                    <datalist id="feedback-list">
+                        <option value="project #1">
+                        <option value="project #2">
+                        <option value="project #3">
+                        <option value="Other suggestions">
+                    </datalist>
+                    <button type="submit" class="active-button">Submit the feedback</button><br />
+                    <textarea placeholder="Leave Feedback Here:"></textarea>
+                    <br />
+                </form>
+            </section>
+
+            <section>
+                <h6>
+                    New HTML CSE134B Project is on going!
+                <progress value="70" max="100"></progress>
+                </h6>
+            </section>
+
+        </main>
+
+        <footer>
+            <hr>
+                <p>
+                    <em>
+                        <b>Welcome</b>
+                    </em>        
+                </p>
+            <section class="copyrights">
+                <h2>Copyright</h2>
+                <p>
+                    <span style="color:blue">
+                        2025 Yanhua Shi. All rights reserved. | Connect with me:
+                    <a href="designed404page.html">
+                        GitHub
+                    </a>&nbsp;&nbsp;
+                    <a href="designed404page.html">
+                        LinkedIn
+                    </a>&nbsp;&nbsp;
+                    <a href="designed404page.html">
+                        Instagram
+                    </a>&nbsp;&nbsp;
+                    <a href="designed404page.html">
+                        Facebook
+                    </a>&nbsp;&nbsp;<br />
+                    </span>
+                </p>
+            </section>
+        </footer>
+
+        <!--onclick to active the button-->
+        <button onclick="toggleDarkMode()">Reading Mode</button>
+        
+        <script>
+            function toggleDarkMode() {
+            document.body.classList.toggle("Dark-Mode");
+            }
+
+            function toggleMenu(){
+                /*select the main-nav*/
+                const nav = document.querySelector(".main-nav");
+                nav.classList.toggle("show");
+            }
+        </script>
+    </body>
+</html>
