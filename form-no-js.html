@@ -1,0 +1,534 @@
+<!Doctype html>
+<html lang="en">
+    <head>
+        <!--page title-->
+        <meta charset="UTF-8">
+        <!--tell browser that this site will auto fit ths screen size -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Yanhua Shi">
+
+
+        <title>
+            Yanhua's contact-site
+        </title>
+
+        <link rel="icon" href="head_icon.png" type="image/png">
+        <style>
+            table {
+                border: 3px solid black;
+                border-collapse: collapse;
+            }
+            th, td {
+                border: 1px solid black;
+                padding: 5px;
+            }
+
+            :root{
+                /* CSS Variables (make sure to use fallbacks while using variables) (2 pts) */
+                --background-color: #c4dfe7;
+                /*Custom Fonts (also with fallback for slow load or failure) (2 pts)*/
+                --main-font:Arial, Helvetica, sans-serif;
+                color:#515556e0;
+                background-color: #c4dfe7;
+                transition: background-color 0.3s, color 0.3s;
+                
+            }
+
+            nav {
+                /*Relative units like em, rem, %, etc. (1 pt)*/
+                font-size: clamp(1rem, 2vw, 1.25rem);
+                background-color: #bbe3f5;
+                display: block;
+                color:#353d3d
+;
+
+                border: 5px solid #61C0BF;
+                padding: 5px;
+                margin: 5px 0;
+
+                max-width: 90vw;
+                box-sizing: border-box;
+                border-radius: 16px;
+            }
+            
+            a {
+                color: #6a7375e0;
+            }
+
+            a:hover {
+                text-decoration: underline;
+            }
+
+            /*interact on the button*/
+            /*and color-mix()*/
+            .active-button:hover{
+                background-color: color-mix(in srgb, rgb(180, 239, 151) 70%, rgb(238, 192, 40));
+            }
+            .active-button:active{
+                background-color: rgb(255, 194, 12) !important;
+            }
+            
+            /*Scoped CSS*/
+            .p{
+                /*Use wider gamut color with color() */
+                background-color:black;
+                font-family:var(--main-font,serif);
+                color: color(display-p3 1 0.5 0);
+            }
+
+            /*Scoped CSS*/
+            .quick-access{
+                /*Dynamic viewport units dvw, dvh, etc. (1 pt)*/
+                height:3dvh;
+                background-color: rgb(231, 252, 252);
+            }
+
+            /*dark-mode quick-access*/
+            body.Dark-Mode .quick-access {
+                background-color: #c9d6d6;
+                }
+
+            /*CSS Animations*/
+            .logo img{
+                opacity:0;
+                animation:fade-In 3.5s ease-in-out forwards;
+                max-width:10%;
+                height: auto;
+            }
+
+            @keyframes fade-In{
+                from{opacity:0} to{opacity:1}
+            }
+
+            /*Media Queries (See Part 3 - Responsive Web Design) (1 pt)*/
+            /*@media media-type and (condition) {/* CSS rules here }*/
+            /*Very small screen (phone)*/
+            @media screen and (max-width: 600px) {
+                nav{
+                    display: flex;
+                    flex-direction: column;
+                    gap: 0.5rem;
+                    font-size: clamp(1rem, 2vw, 1.25rem);
+                    align-items: flex-start;
+                    margin:10px;
+                }
+                
+                img{
+                    width: 100%;
+                    height: auto;
+                    max-width: 100%;
+                }
+
+                
+                /*.photo_package{
+                    max-width: 100%
+                }
+                */
+
+                body{
+                    padding: 10px;
+                }
+
+                main, article, nav {
+                    width: 100%;
+                    box-sizing: border-box;
+                }
+
+                .menu-icon{
+                    display: block;
+                    margin: 10px;
+                }
+
+                .main-nav{
+                    display: none;
+                    flex-direction: column;
+                    gap: 1.5rem;
+                }
+
+                #menu-toggle:checked + .menu-icon + .main-nav {
+                    display: flex;
+                }
+
+                .main-nav.show{
+                    display: flex;
+                }
+            }
+
+            /*tablet or restrictive laptop*/
+            @media screen and (min-width:601px) and (max-width:1024px){
+                nav{
+                    font-size: clamp(1rem, 2vw, 1.25rem);
+                    gap:1rem;
+                }
+
+                img{
+                    width:80%;
+                    max-width:100%;
+                }
+
+                .photo_package{
+                    max-width:80%;
+                }
+
+                .menu-icon{
+                    display: block;
+                    margin: 10px;
+                }
+
+                .main-nav.show{
+                    display: flex;
+                }
+            }
+
+            /*desktop*/
+            @media screen and (min-width:1025px){
+                nav{
+                    font: size 1.4rem;
+                    gap:1.5rem;
+                }
+
+                img{
+                    width:70%
+                }
+
+                .photo_package{
+                    max-width:60%;
+                }
+
+                .menu-icon{
+                    display: block;
+                    margin: 10px;
+                }
+
+                .main-nav{
+                    display: flex;
+                    flex-direction: column;
+                    gap: 1.5rem;
+                    padding: 1rem 1,5rem;
+                }
+                
+                .main-nav.show{
+                    display: flex;
+                }
+            }
+        
+            /*-----------------------------DARK MODE-----------------------------*/    
+            body.Dark-Mode {
+                background-color: #2C2C2C;
+                color: #CCCCCC;
+            }   
+
+            body.Dark-Mode nav {
+                background-color: #000000;
+                color: #CCCCCC;
+            }
+
+            body.Dark-Mode nav a {
+                color: #c6dbf2;
+            }
+
+            .main-nav {
+                display: none;
+                flex-direction: column; /* stack items */
+                gap: 1rem;
+            }
+
+            /*New selectors like has() (2 pts)*/
+            /*Nested*/
+            /*if there has a .active-button*/
+            nav:has(.active-button) {
+                /*then add a 10 px solid rgb line*/
+                border-bottom: 10px solid rgb(238, 255, 0);
+            }    
+
+            /*-----------------------------FORM-----------------------------*/  
+            .form-grid{
+                display:grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 1rem;
+                align-items:start;
+                max-width: 600px;
+                margin: auto;
+                background-color: #ccc;
+                padding: 0.5rem 2rem;
+                border: 1px solid #767c7e;
+            }
+            
+            .form-grid .left-group{
+                    display:flex;
+                    flex-direction:column;
+            }
+
+            :is(input[type="text"],input[type="email"]){
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: clamp(1rem, 2vw, 1.25rem);
+                padding: 0.2rem 0.25rem;
+                border: 2px solid #798083;
+                border-radius: 5px;
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            textarea{
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: clamp(1rem, 2vw, 1.25rem);
+                padding: 1rem 1rem;
+                border: 2px solid #767c7e;
+                border-radius: 5px;
+                width: 100%;
+                height: 6.25rem;
+                box-sizing: border-box; 
+            }
+
+            button {
+                grid-column: 1 / 3;
+                background-color: #CCCCCC;
+                color: rgba(12, 12, 12, 0.525);
+                padding: 1rem 1.5rem;
+                cursor: pointer;
+                border: 1px solid black;
+            }
+
+            button:hover {
+                background-color: #ccccccba;
+                color: yellow;
+            }
+
+            output{
+                font-size: clamp(1rem, 2vw, 1.25rem);
+                color:#767c7e;
+            }
+
+            #infoMsg, 
+            #infoMsg{
+                    min-height: 1.2em;  /* 保证没内容时也占位 */
+                    padding: 0.25rem;
+                    font-size: clamp(0.9rem, 2vw, 1rem);
+                    font-weight: bold;
+                    display:block;
+            }
+
+            #errorMsg{
+                color:orange;
+            }
+
+            #infoMsg{
+                color: red;
+            }
+
+            input:focus,
+            textarea:focus {
+                outline: 2px dashed #f6ff00;   /* highlight in yellow dash-line */
+                background-color: #e8f5ff; 
+            }
+
+            .form-messages{
+                grid-column: 1 / 3;         /* 跨两列显示 */
+                display: flex;
+                flex-direction: column;
+                gap: 0.5rem;
+                margin-top: 0.5rem;
+            }
+
+            /*Showing validation messages or change styles using :invalid and :valid pseudo classes is directly supported in CSS.*/  
+            
+            /*:valid :invalid*/
+            input:valid, textarea:valid{
+                border: 2px solid green;
+                background-color: #00800057;
+            }
+
+            input:invalid, textarea:invalid{
+                border: 2px solid red;
+                background-color: #ff00005a;
+            }
+
+            /*required*/
+            input:required, textarea:required{
+                border-left: 4px solid orange;
+            }
+
+            /*placeholder-shown*/
+            input:placeholder-shown, textarea:placeholder-shown{
+                opacity: 0.7;
+            }
+            
+
+        </style>
+    </head>
+
+    <body>
+        <!--heading content-->
+        <!--header: ReadingMode + LOGO + Nav(quick☰ nav Menu/Search） ------------------------------>
+        <header>
+            <!--reading Mode------------------------------------------------------------------------>
+            <input type="checkbox" id="reading-toggle" hidden>
+            <button class="dark-mode-button" onclick="toggleDarkMode()">Reading Mode</button>
+            
+            <!--LOGO-------------------------------------------------------------------------------->
+            <a href="/" class="logo">
+                <img src="Yas033.png" alt="Yanhua's logo">
+            </a>
+
+            <!--☰ for quick nav-------------------------------------------------------------------->
+            <button class="menu-icon" onclick="toggleMenu()">☰</button>
+            <nav class="main-nav">
+                <!--nav links-->
+                <a href="index.html">Home</a>
+                <a href="about.html">About me</a>
+                <a href="project.html">Projects</a>
+                <a href="resume.html">Resume</a>
+                <a href="contact.html">Contact</a>
+                <form action="designed404page.html" method="get">
+                    <label for="site-search">Search:</label>
+                    <input type="search" id="site-search" name="q" placeholder="..." >
+                    <button type="submit" class="active-button">Go</button>
+                </form>
+                <select>
+                    <option value="/en">English</option>
+                    <option value="/zh">中文</option>
+                </select>
+            </nav>
+        </header>
+
+        <main>
+            <fieldset>
+                <legend>Contact Information</legend>
+                
+                <table>
+                    <tr>
+                        <th>Type</th>
+                        <th>Details</th>
+                    </tr>
+                    <tr>
+                        <td>Email</td>
+                        <td><a href="mailto:yanhua@example.com">yanhua@example.com</a></td>
+                    </tr>
+                    <tr>
+                        <td>Phone</td>
+                        <td><a href="tel:+1234567890">+1 234 567 890</a></td>
+                    </tr>
+                    <tr>
+                        <td>Address</td>
+                        <td>
+                        <address>
+                            Yanhua Shi<br>
+                            123 Sesame Street<br>
+                            Los Angeles, CA 12345<br>
+                            USA
+                        </address>
+                        </td>
+                    </tr>
+                </table>
+
+                <pre>
+                        (\_/)
+                        ( •_•)
+                        / >🥕
+                </pre>
+                
+                <h2>My Location</h2>
+                <!--replace the correct google link later-->
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3355.64207554655!2d-117.1536539245332!3d32.73531628096679!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80d9530f2a86df2f%3A0xd4f3fc1117cb8b16!2sSan%20Diego%20Zoo!5e0!3m2!1sen!2sus!4v1685051928821!5m2!1sen!2sus" 
+                    width="400" 
+                    height="300">
+                </iframe>
+                
+                
+
+                <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100">
+                    <!-- face -->
+                    <circle cx="50" cy="50" r="45" fill="yellow" stroke="black"/>
+    
+                    <!-- left eye -->
+                    <circle cx="35" cy="40" r="5" fill="black"/>
+    
+                    <!-- right eye -->
+                    <circle cx="65" cy="40" r="5" fill="black"/>
+    
+                    <!-- mouse -->
+                    <path d="M36 65 Q50 80 65 66" stroke="black" stroke-width="2" fill="transparent"/>
+                </svg>
+            </fieldset>
+
+            <form action="https://httpbin.org/post" method="post" class="form-grid">
+                <div class="left-group">
+                <label for="fullname">Name:</label>
+                <input type="text" id="fullname" name="fullname" required
+                    placeholder="first-name last-name"
+                    pattern="^[a-zA-Z]+ [a-zA-Z]+$"
+                    title="Please type your full name: first + last"><br />
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required placeholder="xxx@gmail.com">
+                </div>
+
+                <div class="right-group">
+                <label for="comments">Comments:</label>
+                <textarea id="comments" name="comments" required
+                    maxlength="500" placeholder="Max 500 characters"></textarea>
+                </div>
+
+                <input type="hidden" id="possible_bot" name="possible_bot" value="true">
+                <button type="submit" id="submit" name="submit">Submit</button>
+                
+                <div class="form-messages">
+                <output id="errorMsg" aria-live="polite"></output><br>
+                <output id="infoMsg" aria-live="polite"></output>
+                </div>
+            </form>
+        </main>
+
+        <footer>
+            <hr>
+                <p>
+                    <em>
+                        <b>Welcome</b>
+                    </em>        
+                </p>
+            <section class="copyrights">
+                <h2>Copyright</h2>
+                <p>
+                    <span style="color:rgb(0, 0, 0) blanchedalmond">
+                        2025 Yanhua Shi. All rights reserved. | Connect with me:
+                    <a href="designed404page.html">
+                        GitHub
+                    </a>&nbsp;&nbsp;
+                    <a href="designed404page.html">
+                        LinkedIn
+                    </a>&nbsp;&nbsp;
+                    <a href="designed404page.html">
+                        Instagram
+                    </a>&nbsp;&nbsp;
+                    <a href="designed404page.html">
+                        Facebook
+                    </a>&nbsp;&nbsp;<br />
+                    </span>
+                </p>
+            </section>
+        </footer>
+
+        <!--onclick to active the button-->
+        <button onclick="toggleDarkMode()">Reading Mode</button>
+        
+        <script>
+            function toggleDarkMode() {
+            document.body.classList.toggle("Dark-Mode");
+            }
+
+            function toggleMenu(){
+                /*select the main-nav*/
+                const nav = document.querySelector(".main-nav");
+                nav.classList.toggle("show");
+            }
+            /*window.addEventListener("load", () => {
+            document.getElementById("errorMsg").innerText = "This is an error!";
+            document.getElementById("infoMsg").innerText = "This is an info message.";
+            });
+            */
+
+        </script>
+
+    </body>
+</html>

@@ -5,6 +5,8 @@
         <meta charset="UTF-8">
         <!--tell browser that this site will auto fit ths screen size -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Yanhua Shi">
+
 
         <title>
             Yanhua's contact-site
@@ -26,7 +28,7 @@
                 --background-color: #c4dfe7;
                 /*Custom Fonts (also with fallback for slow load or failure) (2 pts)*/
                 --main-font:Arial, Helvetica, sans-serif;
-                color:#749ba3;
+                color:#515556e0;
                 background-color: #c4dfe7;
                 transition: background-color 0.3s, color 0.3s;
                 
@@ -34,10 +36,11 @@
 
             nav {
                 /*Relative units like em, rem, %, etc. (1 pt)*/
-                font-size:1rem;
+                font-size: clamp(1rem, 2vw, 1.25rem);
                 background-color: #bbe3f5;
                 display: block;
-                color:#2c4f4f;
+                color:#353d3d
+;
 
                 border: 5px solid #61C0BF;
                 padding: 5px;
@@ -49,7 +52,7 @@
             }
             
             a {
-                color: #2c4f4f;
+                color: #6a7375e0;
             }
 
             a:hover {
@@ -82,7 +85,7 @@
 
             /*dark-mode quick-access*/
             body.Dark-Mode .quick-access {
-                background-color: #797979;
+                background-color: #c9d6d6;
                 }
 
             /*CSS Animations*/
@@ -105,7 +108,7 @@
                     display: flex;
                     flex-direction: column;
                     gap: 0.5rem;
-                    font-size: 1rem;
+                    font-size: clamp(1rem, 2vw, 1.25rem);
                     align-items: flex-start;
                     margin:10px;
                 }
@@ -116,9 +119,11 @@
                     max-width: 100%;
                 }
 
-                .photo_package{
+                
+                /*.photo_package{
                     max-width: 100%
                 }
+                */
 
                 body{
                     padding: 10px;
@@ -152,7 +157,7 @@
             /*tablet or restrictive laptop*/
             @media screen and (min-width:601px) and (max-width:1024px){
                 nav{
-                    font-size:1.2rem;
+                    font-size: clamp(1rem, 2vw, 1.25rem);
                     gap:1rem;
                 }
 
@@ -168,12 +173,6 @@
                 .menu-icon{
                     display: block;
                     margin: 10px;
-                }
-
-                .main-nav{
-                    display: none;
-                    flex-direction: column;
-                    gap: 1.5rem;
                 }
 
                 .main-nav.show{
@@ -202,9 +201,10 @@
                 }
 
                 .main-nav{
-                    display: none;
+                    display: flex;
                     flex-direction: column;
                     gap: 1.5rem;
+                    padding: 1rem 1,5rem;
                 }
                 
                 .main-nav.show{
@@ -240,6 +240,120 @@
                 /*then add a 10 px solid rgb line*/
                 border-bottom: 10px solid rgb(238, 255, 0);
             }    
+
+            /*-----------------------------FORM-----------------------------*/  
+            .form-grid{
+                display:grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 1rem;
+                align-items:start;
+                max-width: 600px;
+                margin: auto;
+                background-color: #ccc;
+                padding: 0.5rem 2rem;
+                border: 1px solid #767c7e;
+            }
+            
+            .form-grid .left-group{
+                    display:flex;
+                    flex-direction:column;
+            }
+
+            :is(input[type="text"],input[type="email"]){
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: clamp(1rem, 2vw, 1.25rem);
+                padding: 0.2rem 0.25rem;
+                border: 2px solid #798083;
+                border-radius: 5px;
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            textarea{
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: clamp(1rem, 2vw, 1.25rem);
+                padding: 1rem 1rem;
+                border: 2px solid #767c7e;
+                border-radius: 5px;
+                width: 100%;
+                height: 6.25rem;
+                box-sizing: border-box; 
+            }
+
+            button {
+                grid-column: 1 / 3;
+                background-color: #CCCCCC;
+                color: rgba(12, 12, 12, 0.525);
+                padding: 1rem 1.5rem;
+                cursor: pointer;
+                border: 1px solid black;
+            }
+
+            button:hover {
+                background-color: #ccccccba;
+                color: yellow;
+            }
+
+            output{
+                font-size: clamp(1rem, 2vw, 1.25rem);
+                color:#767c7e;
+            }
+
+            #infoMsg, 
+            #infoMsg{
+                    min-height: 1.2em;  /* 保证没内容时也占位 */
+                    padding: 0.25rem;
+                    font-size: clamp(0.9rem, 2vw, 1rem);
+                    font-weight: bold;
+                    display:block;
+            }
+
+            #errorMsg{
+                color:orange;
+            }
+
+            #infoMsg{
+                color: red;
+            }
+
+            input:focus,
+            textarea:focus {
+                outline: 2px dashed #f6ff00;   /* highlight in yellow dash-line */
+                background-color: #e8f5ff; 
+            }
+
+            .form-messages{
+                grid-column: 1 / 3;         /* 跨两列显示 */
+                display: flex;
+                flex-direction: column;
+                gap: 0.5rem;
+                margin-top: 0.5rem;
+            }
+
+            /*Showing validation messages or change styles using :invalid and :valid pseudo classes is directly supported in CSS.*/  
+            
+            /*:valid :invalid*/
+            input:valid, textarea:valid{
+                border: 2px solid green;
+                background-color: #00800057;
+            }
+
+            input:invalid, textarea:invalid{
+                border: 2px solid red;
+                background-color: #ff00005a;
+            }
+
+            /*required*/
+            input:required, textarea:required{
+                border-left: 4px solid orange;
+            }
+
+            /*placeholder-shown*/
+            input:placeholder-shown, textarea:placeholder-shown{
+                opacity: 0.7;
+            }
+            
+
         </style>
     </head>
 
@@ -338,6 +452,32 @@
                 </svg>
             </fieldset>
 
+            <form action="https://httpbin.org/post" method="post" class="form-grid">
+                <div class="left-group">
+                <label for="fullname">Name:</label>
+                <input type="text" id="fullname" name="fullname" required
+                    placeholder="first-name last-name"
+                    pattern="^[a-zA-Z]+ [a-zA-Z]+$"
+                    title="Please type your full name: first + last"><br />
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required placeholder="xxx@gmail.com">
+                </div>
+
+                <div class="right-group">
+                <label for="comments">Comments:</label>
+                <textarea id="comments" name="comments" required
+                    maxlength="500" placeholder="Max 500 characters"></textarea>
+                </div>
+
+                <input type="hidden" id="possible_bot" name="possible_bot" value="true">
+                <button type="submit" id="submit" name="submit">Submit</button>
+                
+                <div class="form-messages">
+                <output id="errorMsg" aria-live="polite"></output><br>
+                <output id="infoMsg" aria-live="polite"></output>
+                </div>
+            </form>
         </main>
 
         <footer>
@@ -350,7 +490,7 @@
             <section class="copyrights">
                 <h2>Copyright</h2>
                 <p>
-                    <span style="color:blue">
+                    <span style="color:rgb(0, 0, 0) blanchedalmond">
                         2025 Yanhua Shi. All rights reserved. | Connect with me:
                     <a href="designed404page.html">
                         GitHub
@@ -382,6 +522,12 @@
                 const nav = document.querySelector(".main-nav");
                 nav.classList.toggle("show");
             }
+            /*window.addEventListener("load", () => {
+            document.getElementById("errorMsg").innerText = "This is an error!";
+            document.getElementById("infoMsg").innerText = "This is an info message.";
+            });
+            */
+
         </script>
 
     </body>
