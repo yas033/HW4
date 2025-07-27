@@ -34,6 +34,14 @@
                 
             }
 
+            body {
+                background-color: #c4dfe7;
+                color:#749ba3;
+                transition: background-color 0.3s, color 0.3s;
+                padding:0;
+                margin:0;
+            }
+
             nav {
                 /*Relative units like em, rem, %, etc. (1 pt)*/
                 font-size: clamp(1rem, 2vw, 1.25rem);
@@ -531,7 +539,7 @@
 
         <!--onclick to active the button-->
         <button onclick="toggleDarkMode()">Reading Mode</button>
-    <script is:inline>
+        <script is:inline>
         /*------------------Characters remaining-----------------------------*/ 
         const fullnameInput = document.getElementById("fullname");
         const textarea = document.getElementById("comments");
