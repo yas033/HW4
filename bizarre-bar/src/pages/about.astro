@@ -1,0 +1,407 @@
+<!Doctype html>
+<html lang="en">
+<!--HEAD-->
+    <head>
+        <!--page title-->
+        <meta charset="UTF-8">
+        <!--tell browser that this site will auto fit ths screen size -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!--page title and icon-->
+        <title>
+            Yanhua's Site
+        </title>
+        <link rel="icon" href="head_icon.png" type="image/png">
+
+        <!--Style Sheet-->
+        <style>
+            body {
+                background-color: #c4dfe7;
+                color:#749ba3;
+                transition: background-color 0.3s, color 0.3s;
+            }
+
+            nav{   
+                font-size:1rem;
+                background-color: #bbe3f5;
+                display: block;
+                color:#2c4f4f;
+
+                border: 5px solid #61C0BF;
+                padding: 5px;
+                margin: 5px 0;
+
+                max-width: 90vw;
+                box-sizing: border-box;
+                border-radius: 16px;            
+            }
+
+            a {
+                color: #2c4f4f;
+            }
+
+            a:hover {
+                text-decoration: underline;
+            }
+
+
+            h1,h2,h3 {
+                font-family: Arial, sans-serif;
+                color:#61C0BF;
+            }
+            
+            .logo img{
+                max-width:10%;
+                height: auto;
+            }
+            
+            .menu-icon{
+                display: none;
+            }
+            
+            .main-nav {
+                display: none;
+                flex-direction: column; /* stack items */
+                gap: 1rem;
+            }
+
+
+            /*Very small screen (phone)*/
+            @media screen and (max-width: 600px) {
+                nav{
+                    display: flex;
+                    flex-direction: column;
+                    gap: 0.5rem;
+                    font-size: 1rem;
+                    align-items: flex-start;
+                }
+                
+                img{
+                    width: 100%;
+                    height: auto;
+                    max-width: 100%;
+                }
+
+                .photo_package{
+                    max-width: 100%
+                }
+
+                body{
+                    padding: 10px;
+                }
+
+                main, article, nav {
+                    width: 100%;
+                    box-sizing: border-box;
+                }
+
+                .menu-icon{
+                    display: block;
+                    margin: 10px;
+                }
+
+                .main-nav{
+                    display: none;
+                    flex-direction: column;
+                    gap: 1.5rem;
+                }
+
+                #menu-toggle:checked + .menu-icon + .main-nav {
+                    display: flex;
+                }
+
+                .main-nav.show{
+                    display: flex;
+                }
+            }
+
+            /*tablet or restrictive laptop*/
+            @media screen and (min-width:601px) and (max-width:1024px){
+                nav{
+                    font-size:1.2rem;
+                    gap:1rem;
+                }
+
+                img{
+                    width:80%;
+                    max-width:100%;
+                }
+
+                .photo_package{
+                    max-width:80%;
+                }
+
+                .menu-icon{
+                    display: block;
+                    margin: 10px;
+                }
+
+                .main-nav{
+                    display: none;
+                    flex-direction: column;
+                    gap: 1.5rem;
+                }
+
+                .main-nav.show{
+                    display: flex;
+                }
+            }
+
+            /*desktop*/
+            @media screen and (min-width:1025px){
+                nav{
+                    font: size 1.4rem;
+                    gap:1.5rem;
+                }
+
+                img{
+                    width:70%
+                }
+
+                .photo_package{
+                    max-width:60%;
+                }
+
+                .menu-icon{
+                    display: block;
+                    margin: 10px;
+                }
+
+                .main-nav{
+                    display: none;
+                    flex-direction: column;
+                    gap: 1.5rem;
+                }
+                
+                .main-nav.show{
+                    display: flex;
+                }
+            }
+
+        /*-----------------------------DARK MODE-----------------------------*/    
+        body.Dark-Mode {
+            background-color: #2C2C2C;
+            color: #CCCCCC;
+        }   
+
+        body.Dark-Mode nav {
+            background-color: #000000;
+            color: #CCCCCC;
+        }
+
+        body.Dark-Mode nav a {
+            color: #c6dbf2;
+        }
+
+        body.Dark-Mode a {
+            color:#bbe3f5
+        }
+
+
+            
+            /*You may use images of any form (GIF, JPEG, WebP, SVG, etc.),
+            but make sure that the types are appropriate for the content served (5 pts)*/
+            /*this package include different forms of the images */
+            /*Image Resizing （5pts)*/
+            .photo_package {
+            position: relative; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 100%;
+            }
+
+            .photo_package img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            }
+
+            /* svg file shows overlay on the img */
+            .overlay {
+            position: absolute;
+            bottom: 20px;
+            right: 10px;
+            top: auto;
+            left: auto;
+            max-width:100%;
+            width: 100px;
+            height: auto;
+            pointer-events: none;
+            opacity: 0.7;
+            }
+        
+        </style>        
+    </head>
+
+<!--BODY-->
+    <body>
+        <!--header: ReadingMode + LOGO + Nav(quick☰ nav Menu/Search） -->
+        <header>
+            <!--reading Mode------------------------------------------------------------------------>
+            <input type="checkbox" id="reading-toggle" hidden>
+            <button class="dark-mode-button" onclick="toggleDarkMode()">Reading Mode</button>
+            
+            <!--LOGO-------------------------------------------------------------------------------->
+            <a href="/" class="logo">
+                <img src="Yas033.png" alt="Yanhua's logo">
+            </a>
+
+            <!--☰ for quick nav-------------------------------------------------------------------->
+            <button class="menu-icon" onclick="toggleMenu()">☰</button>
+            <nav class="main-nav">
+                <!--nav links-->
+                <a href="index.html">Home</a>
+                <a href="about.html">About me</a>
+                <a href="project.html">Projects</a>
+                <a href="resume.html">Resume</a>
+                <a href="contact.html">Contact</a>
+                <form action="designed404page.html" method="get">
+                    <label for="site-search">Search:</label>
+                    <input type="search" id="site-search" name="q" placeholder="..." >
+                    <button type="submit">Go</button>
+                </form>
+                <select>
+                    <option value="/en">English</option>
+                    <option value="/zh">中文</option>
+                </select>
+            </nav>
+        </header>
+
+        <!--MAIN AREA------TEXT/IMG/CONTENTS-------------------------------------------------------->
+        <main>
+            <hgroup>
+                <h1>About Me</h1>
+                <p>Personal Background & Story</p>
+            </hgroup>
+                
+            <figure>
+                <div class="photo_package">
+                    <!--*Your images should be optimized for delivery (5 pts)*-->
+                    <picture>
+                    <source srcset="Reach.webp" type="image/webp">
+
+                    <!--Accessibility issues with your images such as alternative text, proper use of 
+                    contrast and proper use of foreground or background should be accounted for -->
+
+                    <!--To adjust pictures with their frames make sure 
+                    to use object-position and object-fit attributes.-->
+                    <img src="Reach.png" alt="Yanhua's Photo" style="object-fit: cover; object-position: center;">
+                    </picture>
+                    <img src="overlay.svg" class="overlay" alt="" aria-hidden="true">
+                </div> 
+                
+                <figcaption>"This photo was taken when I went snowboarding at Mammoth Mountain last year. It was my first time reaching 11,060 feet."</figcaption>
+            </figure>
+                
+
+            <article>
+                <h2>Introduction</h2>
+                <p>Hi! I'm Yanhua Shi
+                <abbr title="HyperText Markup Language">HTML</abbr> is what I am learning now!
+                </p>
+                
+                <blockquote>
+                    "Just break it down."
+                    <cite>——Yanhua Shi</cite>
+                </blockquote>
+
+                <h3>Interests</h3>
+                <ul>
+                    <li>...</li>
+                    <li>...</li>
+                    <li>...</li>
+                </ul>
+
+                <h3>Value & Visions</h3>
+                <ol>
+                    <li>...</li>
+                    <li>...</li>
+                    <li>...</li>
+                </ol>
+            </article>
+
+            <details>
+                <summary><strong>Fun fact about me</strong></summary>
+                <p>Which one of below is true?</p>
+                    <select>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                    </select>
+                <details><summary><i>Answer</i></summary><p><b>3 is true</b></p></details>
+            </details>
+                    
+            <!--"Labs" or "Experiments" section-->
+            <h2>Custom Elements Experiments</h2>
+
+            <my-intro>
+                <h3>Test Custom Intro</h3>
+                <p>demo of my-intro</p>
+            </my-intro>
+
+            <script>
+                class HelloWorld extends HTMLElement{
+                    constructor(){
+                        super();
+                        console.log("Hello world!");
+                    }
+                }   
+                customElements.define('hello-world',HelloWorld);
+            </script>
+
+            <hello-world></hello-world>
+
+        </main>
+
+        <!--FOOTER---------------------------------------------------------------------------------->
+        <footer>
+            <hr>
+                <p>
+                    <em>
+                        <b>Welcome</b>
+                    </em>        
+                </p>
+            <section class="copyrights">
+                <h2>Copyright</h2>
+                <p>
+                    <span style="color:rgb(0, 0, 0)">
+                        2025 Yanhua Shi. All rights reserved. | Connect with me:
+                    <a href="designed404page.html">
+                        GitHub
+                    </a>&nbsp;&nbsp;
+                    <a href="designed404page.html">
+                        LinkedIn
+                    </a>&nbsp;&nbsp;
+                    <a href="designed404page.html">
+                        Instagram
+                    </a>&nbsp;&nbsp;
+                    <a href="designed404page.html">
+                        Facebook
+                    </a>&nbsp;&nbsp;<br />
+                    </span>
+                </p>
+            </section>
+        </footer>
+
+        <!--onclick to active the button-->
+        <button onclick="toggleDarkMode()">Reading Mode</button>
+        
+        <script is:inline>
+            function toggleDarkMode() {
+            document.body.classList.toggle("Dark-Mode");
+            }
+
+            function toggleMenu(){
+                /*select the main-nav*/
+                const nav = document.querySelector(".main-nav");
+                nav.classList.toggle("show");
+            }
+        </script>
+
+            <!--fallback if the JS is disabled-->
+        <noscript>
+            <p style="color:red;">！！JavaScript is disabled. Night-Mode now is unavailable.</p>
+        </noscript>
+    </body>
+</html>

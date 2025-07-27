@@ -531,14 +531,13 @@
 
         <!--onclick to active the button-->
         <button onclick="toggleDarkMode()">Reading Mode</button>
-    
     <script is:inline>
         /*------------------Characters remaining-----------------------------*/ 
         const fullnameInput = document.getElementById("fullname");
         const textarea = document.getElementById("comments");
         const characterCount = document.getElementById("characterCount");
         const maxLength = textarea.getAttribute("maxlength");
-        const errorMsg = document.getElementById("errorMsg");
+        const errorMsg = document.getElementById("errorMsg")；
 
         /*pattern, only allows a-z, A-Z, and space*/
         const namePattern = /^[a-zA-Z]+ [a-zA-Z]+$/;
@@ -602,7 +601,7 @@
     
     <!--fallback if the JS is disabled-->
     <noscript>
-        <p style="color:red;">！！ JavaScript is disabled. Night-Mode now is unavailable.</p>
+        <p style="color:red;">！！JavaScript is disabled. Night-Mode now is unavailable.</p>
     </noscript>
     
     </body>

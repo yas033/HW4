@@ -3,7 +3,7 @@
         const textarea = document.getElementById("comments");
         const characterCount = document.getElementById("characterCount");
         const maxLength = textarea.getAttribute("maxlength");
-        const errorMsg = document.getElementById("errorMsg")
+        const errorMsg = document.getElementById("errorMsg");
 
         /*pattern, only allows a-z, A-Z, and space*/
         const namePattern = /^[a-zA-Z]+ [a-zA-Z]+$/;
